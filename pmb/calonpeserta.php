@@ -23,7 +23,7 @@
         <td><?php echo $dt['agama']; ?></td>
         <td><?php echo $dt['sekolah_asal']; ?></td>
         <td>
-            <a class="btn btn-warning" href="./index.php?p=editpeserta&id=<?php echo $dt['id_siswa']?>">Edit</a>
+            <button class="btn btn-warning" onclick='editData(<?php echo json_encode($dt); ?>)' data-bs-toggle="modal" data-bs-target="#modaleditdata">Edit</button>
             <button class="btn btn-danger text-white" onclick="deletedata('<?php echo $dt['id_siswa']?>')">Delete</button>
         </td>
     </tr>

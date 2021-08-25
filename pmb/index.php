@@ -73,6 +73,65 @@
         </div>     
     </div>
 
+    <!-- MODAL EDIT DATA -->
+    <div class="modal fade" id="modaleditdata" tabindex="-1" aria-labelledby="modalEditDataLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditDataLabel">Tambah Data Peserta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" class="form-control" name="nama" id="edit-nama">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Alamat" class="form-label">Alamat</label>
+                            <textarea class="form-control" name="alamat" id="edit-alamat" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="jeniskelamin" id="jeniskelamin-l" value="L">
+                                <label for="jeniskelamin" class="form-check-label">Laki-laki</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="jeniskelamin" id="jeniskelamin-p" value="P">
+                                <label for="jeniskelamin" class="form-check-label">Perempuan</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agama" class="form-label">Agama</label>
+                            <select class="form-select" name="agama" id="edit-agama">
+                                <option selected disabled>-- Pilih salah satu --</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Protestan">Protestan</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Khonghucu">Khonghucu</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sekolahasal" class="form-label">Sekolah Asal</label>
+                            <input type="text" class="form-control" name="sekolahasal" id="edit-sekolahasal">
+                            <input type="hidden" name="id_siswa" id="edit-idsiswa">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                        <button type="reset" class="btn btn-info text-white">Reset</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Kembali</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>     
+    </div>
+
+
     <!-- PROSESING DATA -->
     <?php    
     if (isset($_POST['simpan'])) {
@@ -85,6 +144,21 @@
         $result = insertData($arr);
         if ($result) {
             echo "<div id='message' style='visibility: hidden'>Data berhasil ditambahkan</div>";
+        } else {
+            echo "<div id='message' style='visibility: hidden'>Error: ".mysqli_error($conn)."</div>";
+        }
+    }
+
+    if(isset($_POST['update'])) {
+        $arr['id_siswa'] = $_POST['id_siswa'];
+        $arr['nama'] = $_POST['nama'];
+        $arr['alamat'] = $_POST['alamat'];
+        $arr['jenis_kelamin'] = $_POST['jeniskelamin'];
+        $arr['agama'] = $_POST['agama'];
+        $arr['sekolah_asal'] = $_POST['sekolahasal'];
+        $result = updateData($arr);
+        if ($result) {
+            echo "<div id='message' style='visibility: hidden'>Data berhasil diperbarui</div>";
         } else {
             echo "<div id='message' style='visibility: hidden'>Error: ".mysqli_error($conn)."</div>";
         }
